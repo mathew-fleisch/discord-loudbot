@@ -1,11 +1,13 @@
 # DISCORD LOUDBOT 
+
 Inspired by the slack bot: https://github.com/ceejbot/LOUDBOT
+
 This bot uses sqlite to store yells and runs on discord instead of slack.
 
 
 ## Setup
 
-First you will need a discord app and bot token to send messages. See this youtube playlist to learn how: (https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4)[https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4]
+First you will need a discord app and bot token to send messages. See this youtube playlist to learn how: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4
 
 ```
 # Create a sqlite db placeholder
