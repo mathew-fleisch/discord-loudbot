@@ -4,6 +4,10 @@ Inspired by the slack bot: https://github.com/ceejbot/LOUDBOT
 
 This bot uses sqlite to store yells and runs on discord instead of slack.
 
+## Requirements
+
+ - nodejs
+ - sqlite3
 
 ## Setup
 
@@ -17,7 +21,6 @@ touch loudbot.sqlite
 cp sample.env .env
 
 # Set unique values in .env file
-
 
 # Download dependencies
 npm install
