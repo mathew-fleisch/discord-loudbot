@@ -23,11 +23,11 @@ async function getRandomYell(db, msg) {
 client.on('message', async msg => {
   // console.log(msg)
   if (msg.channel.id != process.env.RESTRICT_CHANNEL) {
-    console.log("Do not display in this channel: " + msg.channel.id)
+    console.log("Do not display in this channel: " + msg.channel.id + " != " + process.env.RESTRICT_CHANNEL)
     return
   }
   if (msg.author.id == process.env.EXCLUDE_BOT) {
-    console.log("Do not react to bot messages: " + msg.author.id + " " + process.env.EXCLUDE_BOT)
+    console.log("Do not react to bot messages: " + msg.author.id + " == " + process.env.EXCLUDE_BOT)
     return
   }
   // console.log("Not a bot message and in the restricted channel")
