@@ -56,4 +56,23 @@ docker run --rm -it \
   discord-loudbot:latest
 ```
 
+***Run Docker (from docker hub)***
+
+Requirements
+
+ - docker
+
+
+```
+# Clone repository
+mkdir -p discord-loudbot && cd discord-loudbot
+
+# Create sqlite file and .env like in local setup
+
+# Run the docker container and mount the local .env and .sqlite files inside the container
+docker run --rm -it \
+  -v ${PWD}/.env:/home/node/app/.env \
+  -v ${PWD}/loudbot.sqlite:/home/node/app/loudbot.sqlite \
+  mathewfleisch/discord-loudbot:latest
+```
 
