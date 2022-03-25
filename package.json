@@ -1,13 +1,13 @@
 {
   "name": "loudbot",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "mathew.fleisch@gmail.com",
   "license": "ISC",
   "dependencies": {
     "dblite": "^1.1.4",
