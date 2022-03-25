@@ -64,6 +64,10 @@ jobs:
           DISCORD_CREDS: ${{ secrets.DISCORD_CREDS }}
         run: |
           echo "$DISCORD_CREDS" > .env \
+            && make sqlite-seed \
+            && make kind-setup \
+            && make helm-install \
+            && sleep 3 \
             && make kind-test \
             && make kind-cleanup \
             && rm -rf .env

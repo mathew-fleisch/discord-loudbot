@@ -78,9 +78,8 @@ kind-load:
 	kind load docker-image $(TARGET_REGISTRY_REPOSITORY):$(TARGET_TAG)
 
 .PHONY: kind-test
-kind-test: sqlite-seed kind-setup helm-install
-	@sleep 3
-	kubectl -n $(NAMESPACE) logs --tail 20 $(shell make get-pods)
+kind-test:
+	kubectl -n $(NAMESPACE) logs --tail 1 $(shell make get-pods)
 
 .PHONY: kind-cleanup
 kind-cleanup:
