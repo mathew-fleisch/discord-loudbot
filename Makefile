@@ -80,7 +80,7 @@ kind-load:
 .PHONY: kind-test
 kind-test: sqlite-seed kind-setup helm-install
 	@sleep 3
-	kubectl -n $(NAMESPACE) logs --tail 1 $(shell make get-pods)
+	kubectl -n $(NAMESPACE) logs --tail 20 $(shell make get-pods)
 
 .PHONY: kind-cleanup
 kind-cleanup:
