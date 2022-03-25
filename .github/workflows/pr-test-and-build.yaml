@@ -69,6 +69,7 @@ jobs:
             && make helm-install \
             && sleep 3 \
             && make kind-test \
+            && sleep 60 \
             && make kind-cleanup \
             && rm -rf .env
       # -
