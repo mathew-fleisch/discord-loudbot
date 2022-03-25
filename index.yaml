@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  discord-loudbot:
+  - apiVersion: v2
+    appVersion: v1.0.3
+    created: "2022-03-25T17:57:30.89700248Z"
+    description: A Helm chart for Kubernetes
+    digest: e176a2af9ff4af1784ed77622ae5dbf5dc9fe62d4877dfe1f6f5c8336b5f33d1
+    name: discord-loudbot
+    type: application
+    urls:
+    - https://github.com/mathew-fleisch/discord-loudbot/releases/download/discord-loudbot-v1.0.3/discord-loudbot-v1.0.3.tgz
+    version: v1.0.3
+generated: "2022-03-25T17:57:30.776421443Z"
