@@ -7,7 +7,7 @@ RUN apk update && apk add sqlite --no-cache \
   
 WORKDIR /home/node/app
 
-COPY package*.json .
+COPY package*.json ./
 
 USER node
 
