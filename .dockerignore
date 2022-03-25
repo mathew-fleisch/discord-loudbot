@@ -2,3 +2,5 @@ node_modules
 .env
 *.sqlite
 *deployment.yaml
+.git
+Dockerfile
