@@ -34,8 +34,8 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.REGITRY_USERNAME }}
-          password: ${{ secrets.REGITRY_PASSWORD }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
       -
         name: Login to GitHub Container Registry
         uses: docker/login-action@v1 
@@ -52,11 +52,11 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/mathew-fleisch/discord-loudbot:latest
-            ghcr.io/mathew-fleisch/discord-loudbot:${{ env.RELEASE_VERSION }}
-            mathewfleisch/discord-loudbot:latest
-            mathewfleisch/discord-loudbot:${{ env.RELEASE_VERSION }}
-          cache-from: type=registry,ref=mathewfleisch/discord-loudbot:latest
+            ghcr.io/${{ github.repository_owner }}/discord-loudbot:latest
+            ghcr.io/${{ github.repository_owner }}/discord-loudbot:${{ env.RELEASE_VERSION }}
+            ${{ secrets.REGISTRY_USERNAME }}/discord-loudbot:latest
+            ${{ secrets.REGISTRY_USERNAME }}/discord-loudbot:${{ env.RELEASE_VERSION }}
+          cache-from: type=registry,ref=${{ secrets.REGISTRY_USERNAME }}/discord-loudbot:latest
           cache-to: type=inline
       - 
         name: Configure Git
