@@ -5,7 +5,8 @@ NAMESPACE?=bots
 TARGET_REGISTRY_REPOSITORY?=$(REPONAME)
 TARGET_TAG?=local
 LOCAL_KIND_CONFIG?=kind-config.yaml
-
+LOCAL_ENV_VARS?=$(PWD)/.env 
+LOCAL_SQLITE_PATH?=$(PWD)/loudbot.sqlite
 
 .PHONY: help
 help:
@@ -117,6 +118,8 @@ helm-install:
 		--namespace $(NAMESPACE) \
 		--set image.repository=$(TARGET_REGISTRY_REPOSITORY) \
 		--set image.tag=$(TARGET_TAG) \
+		--set envvarsPath=$(LOCAL_ENV_VARS) \
+		--set sqlitePath=$(LOCAL_SQLITE_PATH) \
 		--debug \
 		--wait
 
@@ -146,4 +149,4 @@ sqlite-dump:
 
 .PHONY: version
 version:
-	@echo "$(shell yq e '.version' charts/discord-loudbot/Chart.yaml)-$(shell git rev-parse --short HEAD)"
+	@yq e '.version' charts/discord-loudbot/Chart.yaml
