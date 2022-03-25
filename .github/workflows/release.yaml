@@ -1,0 +1,71 @@
+# Name:        release.yaml
+# Author:      Mathew Fleisch <mathew.fleisch@gmail.com>
+# Description: This action will build and push a docker container, when triggered by
+#              pushing to the main branch
+name: Release discord-loudbot
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+
+  build_container:
+    name: Build and Push Containers
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      -
+        name: Set tag environment variable
+        run: echo "RELEASE_VERSION=$(make version)" >> $GITHUB_ENV
+      -
+        name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.REGITRY_USERNAME }}
+          password: ${{ secrets.REGITRY_PASSWORD }}
+      -
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GIT_TOKEN }}
+      -
+        name: Build and Push Containers
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: .
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ghcr.io/mathew-fleisch/discord-loudbot:latest
+            ghcr.io/mathew-fleisch/discord-loudbot:${{ env.RELEASE_VERSION }}
+            mathewfleisch/discord-loudbot:latest
+            mathewfleisch/discord-loudbot:${{ env.RELEASE_VERSION }}
+          cache-from: type=registry,ref=mathewfleisch/discord-loudbot:latest
+          cache-to: type=inline
+      - 
+        name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - 
+        name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.1.0
+        env:
+          CR_TOKEN: "${{ secrets.GIT_TOKEN }}"

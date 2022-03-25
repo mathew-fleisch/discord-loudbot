@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "discord-loudbot.fullname" . }}
+  labels:
+    {{- include "discord-loudbot.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "discord-loudbot.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "discord-loudbot.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: loudbotsqlite
+          hostPath:
+            path: {{ .Values.sqlitePath }}
+        - name: env-vars
+          hostPath:
+            path: {{ .Values.envvarsPath }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          workingDir: /home/node/app
+          volumeMounts:
+            - name: loudbotsqlite
+              mountPath: /home/node/app/loudbot.sqlite
+            - name: env-vars
+              mountPath: /home/node/app/.env
