@@ -52,10 +52,10 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ github.repository_owner }}/discord-loudbot:latest
-            ghcr.io/${{ github.repository_owner }}/discord-loudbot:${{ env.RELEASE_VERSION }}
-            ${{ secrets.REGISTRY_USERNAME }}/discord-loudbot/discord-loudbot:latest
-            ${{ secrets.REGISTRY_USERNAME }}/discord-loudbot/discord-loudbot:${{ env.RELEASE_VERSION }}
+            ghcr.io/${{ github.repository_owner }}/discord-loudbot/discord-loudbot:latest
+            ghcr.io/${{ github.repository_owner }}/discord-loudbot/discord-loudbot:${{ env.RELEASE_VERSION }}
+            ${{ secrets.REGISTRY_USERNAME }}/discord-loudbot:latest
+            ${{ secrets.REGISTRY_USERNAME }}/discord-loudbot:${{ env.RELEASE_VERSION }}
           cache-from: type=registry,ref=${{ secrets.REGISTRY_USERNAME }}/discord-loudbot:latest
           cache-to: type=inline
       - 
