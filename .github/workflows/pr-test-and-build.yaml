@@ -60,9 +60,13 @@ jobs:
             yq 4.22.1
       -
         name: KinD Tests
+        env:
+          DISCORD_CREDS: ${{ secrets.DISCORD_CREDS }}
         run: |
-          make kind-test
-          make kind-cleanup
+          echo "$DISCORD_CREDS" > .env \
+            && make kind-test \
+            && make kind-cleanup \
+            && rm -rf .env
       # -
       #   name: Anchor Container Scan
       #   uses: anchore/scan-action@main
