@@ -146,4 +146,4 @@ sqlite-dump:
 
 .PHONY: version
 version:
-	@echo "v$(shell yq e '.version' charts/discord-loudbot/Chart.yaml)-$(shell git rev-parse --short HEAD)"
+	@echo "$(shell yq e '.version' charts/discord-loudbot/Chart.yaml)-$(shell git rev-parse --short HEAD)"
