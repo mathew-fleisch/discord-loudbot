@@ -1,5 +1,6 @@
 
 REPONAME?=discord-loudbot
+RELEASENAME?=$(REPONAME)
 NAMESPACE?=bots
 # Docker regitry: mathewfleisch/discord-loudbot
 TARGET_REGISTRY_REPOSITORY?=$(REPONAME)
@@ -91,7 +92,7 @@ kind-cleanup:
 get-pods:
 	@kubectl get pods \
 		--namespace $(NAMESPACE) \
-		-l "app.kubernetes.io/name=$(REPONAME),app.kubernetes.io/instance=$(REPONAME)" \
+		-l "app.kubernetes.io/name=$(RELEASENAME),app.kubernetes.io/instance=$(RELEASENAME)" \
 		-o jsonpath="{.items[0].metadata.name}"
 
 .PHONY: get-logs
@@ -112,7 +113,7 @@ helm-lint:
 
 .PHONY: helm-install
 helm-install:
-	helm upgrade $(REPONAME) charts/$(REPONAME) \
+	helm upgrade $(RELEASENAME) charts/$(REPONAME) \
 		--install \
 		--create-namespace \
 		--namespace $(NAMESPACE) \
@@ -125,7 +126,7 @@ helm-install:
 
 .PHONY: helm-delete
 helm-delete:
-	helm --namespace $(NAMESPACE) delete $(REPONAME) || true
+	helm --namespace $(NAMESPACE) delete $(RELEASENAME) || true
 
 
 
