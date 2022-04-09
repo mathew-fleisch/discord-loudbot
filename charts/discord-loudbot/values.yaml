@@ -11,3 +11,4 @@ image:
 
 sqlitePath: /loudbot-configs/loudbot.sqlite
 envvarsPath: /loudbot-configs/.env
+nodeName: ""

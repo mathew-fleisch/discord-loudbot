@@ -72,7 +72,7 @@ docker-run-exec:
 .PHONY: kind-setup
 kind-setup: docker-build
 	yq '.nodes[0].extraMounts[0].hostPath="$(PWD)"' sample-kind-config.yaml > $(LOCAL_KIND_CONFIG)
-	kind create cluster --config $(LOCAL_KIND_CONFIG) || true
+	kind create cluster --config $(LOCAL_KIND_CONFIG) -v 5 || true
 	make kind-load
 
 .PHONY: kind-load
