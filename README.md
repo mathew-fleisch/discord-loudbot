@@ -116,7 +116,7 @@ TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot \
 
 ### Install in Existing Kubernetes Cluster
 
-Loudbot must be tied to a single node in a kubernetes cluster for persistence of the sqlite db and .env files. Create the .env and sqlite on a node of your cluster ().
+Loudbot must be tied to a single node in a kubernetes cluster for persistence of the sqlite db and .env files. Create the .env and sqlite on a node of your cluster and take note of path for environment variables (ENV_VARS_PATH, SQLITE_PATH, LOUDBOT_HOSTNAME).
 
 ```bash
 # Add the helm repo to your cluster
