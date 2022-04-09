@@ -152,3 +152,5 @@ helm upgrade ${RELEASENAME} discord-loudbot \
   --debug \
   --wait
 ```
+
+<img src="https://i.imgur.com/NgJZjL4.gif" width="100%" />
