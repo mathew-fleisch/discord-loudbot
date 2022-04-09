@@ -73,7 +73,7 @@ make docker-run
 
 # Or upstream by setting the registry-path and container tag
 TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot \
-  TARGET_TAG=v1.0.3 \
+  TARGET_TAG=v1.0.4 \
   make docker-run
 ```
 
@@ -119,7 +119,7 @@ make helm-install
 
 # Or upstream by setting the registry-path and container tag
 TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot \ 
-  TARGET_TAG=v1.0.3 \
+  TARGET_TAG=v1.0.4 \
   make helm-install
 ```
 
@@ -135,7 +135,7 @@ helm repo add discord-loudbot https://mathew-fleisch.github.io/discord-loudbot
 export RELEASENAME=loudbot
 export NAMESPACE=bots
 export TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot
-export TARGET_TAG=v1.0.3
+export TARGET_TAG=v1.0.4
 export ENV_VARS_PATH=/path/to/.env
 export SQLITE_PATH=/path/to/loudbot.sqlite
 export LOUDBOT_HOSTNAME=NODENAME
