@@ -39,12 +39,11 @@ npm install
 node index.js
 ```
 
-### build docker
+### Build/Run Docker
 
 Requirements
 
- - docker
-
+- docker
 
 ```bash
 # Clone repository
@@ -64,16 +63,17 @@ cp sample.env .env
 make docker-run
 
 # Or upstream by setting the registry-path and container tag
-TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot TARGET_TAG=v1.0.1 make docker-run
+TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot \
+  TARGET_TAG=v1.0.3 \
+  make docker-run
 ```
 
-
-***Run as kubernetes deployment in KinD***
+### Run as Kubernetes deployment in KinD
 
 Requirements
 
- - docker
- - KinD
+- docker
+- KinD
 
 The sqlite db and .env files are mounted as volumes into the container and can be updated on the host machine dynamically and allow for persistence if/when the pod dies. This repository includes a helm chart to install this bot in a kubernetes cluster. After creating the `loudbot.sqlite` and `.env` files locally, create the following yaml file to mount these configs into a kind cluster (update `hostPath` to directory path of your local config files and save this file as `kind-config.yaml`):
 
@@ -109,6 +109,37 @@ With a running kind cluster, use the [makefile target](Makefile) to run that con
 make helm-install
 
 # Or upstream by setting the registry-path and container tag
-TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot TARGET_TAG=v1.0.1 make docker-run
+TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot \ 
+  TARGET_TAG=v1.0.3 \
+  make helm-install
 ```
 
+### Install in Existing Kubernetes Cluster
+
+Loudbot must be tied to a single node in a kubernetes cluster for persistence of the sqlite db and .env files. Create the .env and sqlite on a node of your cluster ().
+
+```bash
+# Add the helm repo to your cluster
+helm repo add discord-loudbot https://mathew-fleisch.github.io/discord-loudbot
+
+# Define variables that will be used as overrides in helm install command
+export RELEASENAME=loudbot
+export NAMESPACE=bots
+export TARGET_REGISTRY_REPOSITORY=mathewfleisch/discord-loudbot
+export TARGET_TAG=v1.0.3
+export ENV_VARS_PATH=/path/to/.env
+export SQLITE_PATH=/path/to/loudbot.sqlite
+export LOUDBOT_HOSTNAME=NODENAME
+
+helm upgrade ${RELEASENAME} discord-loudbot \
+  --install \
+  --create-namespace \
+  --namespace ${NAMESPACE} \
+  --set image.repository=${TARGET_REGISTRY_REPOSITORY} \
+  --set image.tag=${TARGET_TAG} \
+  --set envvarsPath=${ENV_VARS_PATH} \
+  --set sqlitePath=${SQLITE_PATH} \
+  --set nodeName=${LOUDBOT_HOSTNAME} \
+  --debug \
+  --wait
+```
