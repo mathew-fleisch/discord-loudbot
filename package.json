@@ -1,6 +1,6 @@
 {
   "name": "loudbot",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "dblite": "^1.1.4",
-    "discord.js": "^12.5.1",
+    "discord.js": "^13.6.0",
     "dotenv": "^8.2.0"
   }
 }

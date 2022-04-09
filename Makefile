@@ -31,7 +31,7 @@ help:
 	@echo " <=> make kind-cleanup <----> delete an existin KinD cluster"
 	@echo " <=> make kind-load <-------> load a locally built docker container into a running KinD cluster"
 	@echo " <=> make kind-setup <------> create a KinD cluster with local config-yaml"
-	@echo " <=> make kind-test <-------> "
+	@echo " <=> make kind-test <-------> display last log line of running loudbot to prove it is connected"
 	@echo " <=> make lint-actions <----> run .gihtub/workflows/*.yaml|yml through action-valdator tool"
 	@echo " <=> make sqlite-count <----> get the number of rows in the sqlite db"
 	@echo " <=> make sqlite-dump <-----> display all rows of the sqlite db"

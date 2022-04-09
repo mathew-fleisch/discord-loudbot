@@ -1,6 +1,6 @@
 require('dotenv').config()
 const Discord = require('discord.js')
-const client = new Discord.Client()
+const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 
 let dblite = require('dblite')
 let db = dblite(process.env.PATH_TO_SQLITE_DB || "/home/node/app/loudbot.sqlite")
@@ -17,10 +17,10 @@ async function getRandomYell(db, msg) {
       return
     }
     console.log("getRandomYell( '" + res[0][0] + "' )")
-    await msg.channel.send(res)
+    await msg.channel.send({ content: res[0][0] })
   })
 }
-client.on('message', async msg => {
+client.on('messageCreate', async msg => {
   if (msg.channel.id != process.env.LOUDBOT_CHANNEL) {
     // console.log("Do not display in this channel: " + msg.channel.id + " != " + process.env.LOUDBOT_CHANNEL)
     return
