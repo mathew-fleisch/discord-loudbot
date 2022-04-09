@@ -4,29 +4,37 @@
 [![Release Containers & Helm Chart](https://github.com/mathew-fleisch/discord-loudbot/actions/workflows/release.yaml/badge.svg)](https://github.com/mathew-fleisch/discord-loudbot/actions/workflows/release.yaml)
 [Docker Hub](https://hub.docker.com/r/mathewfleisch/discord-loudbot/tags?page=1&ordering=last_updated)
 
-Inspired by the slack bot: https://github.com/ceejbot/LOUDBOT
+Inspired by the slack bot: <https://github.com/ceejbot/LOUDBOT>
 
-This bot uses sqlite to store yells and runs on discord instead of slack.
+This Discord bot is triggered by messages in all capital letters (+ emojis and special characters) in the configured channel. Once triggered, the message is stored in a sqlite database, and a random message from that database is printed as a response.
+
+<img src="https://i.imgur.com/7FqGnpz.png" width="300" />
 
 ## Setup
 
 First you will need a discord app and bot token to send messages. See this youtube playlist to learn how: https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4
 
-Once you have a discord token, create a [.env file](sample.env) to point at your discord channel. Setting `LOUDBOT_CHANNEL` restricts loudbot to listening in a specific channel and `LOUDBOT_ID` prevents loudbot from triggering itself.
+Once you have a discord token, clone this repository and create a [.env file](sample.env) to point at your discord channel. Setting `LOUDBOT_CHANNEL` restricts loudbot to listening in a specific channel and `LOUDBOT_ID` prevents loudbot from triggering itself.
 
 ```bash
+# Clone repository
+git clone https://github.com/mathew-fleisch/discord-loudbot.git && cd discord-loudbot
+
+# Create .env file
 PATH_TO_SQLITE_DB=/home/node/app/loudbot.sqlite
 DISCORD_TOKEN=
 LOUDBOT_CHANNEL=
 LOUDBOT_ID=
 ```
 
+With the .env file populated, run loudbot's source code with node, or by building a docker container, or by running the pre-built images in dockerhub/github, or by running in a KinD cluster, or by installing in an existing kubernetes cluster with helm. See below for examples.
+
 ### Run node js locally
 
 Requirements
 
- - nodejs
- - sqlite3
+- nodejs
+- sqlite3
 
 ```bash
 # Create a sqlite db placeholder
@@ -50,9 +58,6 @@ Requirements
 - docker
 
 ```bash
-# Clone repository
-git clone https://github.com/mathew-fleisch/discord-loudbot.git && cd discord-loudbot
-
 # Build container
 make docker-build
 
