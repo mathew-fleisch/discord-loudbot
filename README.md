@@ -1,4 +1,8 @@
-# DISCORD LOUDBOT 
+# DISCORD LOUDBOT
+
+[![KinD Tests](https://github.com/mathew-fleisch/discord-loudbot/actions/workflows/pr-test-and-build.yaml/badge.svg)](https://github.com/mathew-fleisch/discord-loudbot/actions/workflows/pr-test-and-build.yaml)
+[![Release Containers & Helm Chart](https://github.com/mathew-fleisch/discord-loudbot/actions/workflows/release.yaml/badge.svg)](https://github.com/mathew-fleisch/discord-loudbot/actions/workflows/release.yaml)
+[Docker Hub](https://hub.docker.com/r/mathewfleisch/discord-loudbot/tags?page=1&ordering=last_updated)
 
 Inspired by the slack bot: https://github.com/ceejbot/LOUDBOT
 
