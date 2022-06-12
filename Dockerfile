@@ -11,10 +11,8 @@ COPY package*.json ./
 
 USER node
 
-RUN npm install \
-  && rm -rf /home/node/.npm
+RUN npm install && rm -rf /home/node/.npm
 
 COPY --chown=node:node . .
-
 
 CMD [ "npm", "start" ]
